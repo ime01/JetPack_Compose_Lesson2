@@ -4,8 +4,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
@@ -49,80 +48,85 @@ class MainActivity : AppCompatActivity() {
 
            TopAppBar(title = { Text(text = "Picture Book") })
 
-           Card(modifier = Modifier.padding(10.dp).fillMaxWidth().shadow(5.dp)) {
+//
 
-               Row() {
+               Card(modifier = Modifier
+                   .padding(10.dp)
+                   .fillMaxWidth()
+                   .shadow(5.dp)) {
 
-                   Text(text = "Ramdom words and pictures", color = Color.Gray, modifier = Modifier
-                       .padding(all = 10.dp)
-                       .align(Alignment.CenterVertically))
+                   Row() {
 
-                   Button(onClick = {
-                                    when{
-                                        listOfData().indexOf(memoryData.value) == listOfData().size-1->{
-
-                                            memoryData.value = listOfData()[0]
-                                            Toast.makeText(context, "You've gotten to the end of the Array", Toast.LENGTH_LONG).show()
-
-                                        }
-                                        else->{
-                                            memoryData.value = listOfData()[listOfData().indexOf(memoryData.value) + 1]
-                                        }
-                                    }
-                   },
-                       Modifier
-                           .padding(10.dp)
-                           .fillMaxWidth()) {
-
-                       Text(text = "CHANGE", color = Color.White, modifier = Modifier
+                       Text(text = "Random words and pictures", color = Color.Gray, modifier = Modifier
                            .padding(all = 10.dp)
                            .align(Alignment.CenterVertically))
 
+                       Button(onClick = {
+                           when{
+                               listOfData().indexOf(memoryData.value) == listOfData().size-1->{
+
+                                   memoryData.value = listOfData()[0]
+                                   Toast.makeText(context, "You've gotten to the end of the Array", Toast.LENGTH_LONG).show()
+
+                               }
+                               else->{
+                                   memoryData.value = listOfData()[listOfData().indexOf(memoryData.value) + 1]
+                               }
+                           }
+                       },
+                           Modifier
+                               .padding(10.dp)
+                               .fillMaxWidth()) {
+
+                           Text(text = "CHANGE", color = Color.White, modifier = Modifier
+                               .padding(all = 10.dp)
+                               .align(Alignment.CenterVertically))
+
+                       }
+
                    }
+               }
+
+
+
+               Card(modifier = Modifier
+                   .padding(10.dp)
+                   .fillMaxWidth()
+                   .shadow(5.dp)){
+
+                   Column() {
+                       Image(painter = painterResource(id = memoryData.value.aImageRes), contentDescription = "images")
+                       Text(text = memoryData.value.words, modifier = Modifier.padding(5.dp), color = Color.DarkGray, fontSize = quoteSize.value.sp)
+
+                   }
+               }
+
+//           Row(modifier = Modifier.padding(5.dp).verticalScroll(rememberScrollState())) {
+
+
+               Button(onClick = {quoteSize.value = quoteSize.value + 1 },
+                   Modifier
+                       .padding(all = 10.dp)
+                       .fillMaxWidth()) {
+
+                   Text(text = "Increase Font Size", color = Color.White)
+
+               }
+
+
+               Button(onClick = {quoteSize.value = quoteSize.value - 1},
+                   Modifier
+                       .padding(all = 10.dp)
+                       .fillMaxWidth()) {
+
+                   Text(text = "Decrease Font Size", color = Color.White)
 
                }
            }
 
 
 
-           Card(modifier = Modifier
-               .padding(10.dp)
-               .fillMaxWidth()
-               .shadow(5.dp)){
-
-               Column() {
-                   Image(painter = painterResource(id = memoryData.value.aImageRes), contentDescription = "images")
-                   Text(text = memoryData.value.words, modifier = Modifier.padding(5.dp), color = Color.DarkGray, fontSize = quoteSize.value.sp)
-
-               }
-           }
-
-
-           Button(onClick = {quoteSize.value = quoteSize.value + 1 },
-               Modifier
-                   .padding(all = 10.dp)
-                   .fillMaxWidth()) {
-
-               Text(text = "Increase Font Size", color = Color.White)
-
-           }
-
-
-           Button(onClick = {quoteSize.value = quoteSize.value - 1 },
-               Modifier
-                   .padding(all = 10.dp)
-                   .fillMaxWidth()) {
-
-               Text(text = "Decrease Font Size", color = Color.White)
-
-           }
-
-
-
-
-
-
-       }
+//       }
    }
 
 
