@@ -5,19 +5,19 @@ import android.view.Surface
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import com.example.myjetpackcomposelesson2.R
+import dev.chrisbanes.accompanist.picasso.PicassoImage
 import kotlinx.coroutines.launch
 
 class NavigationDrawerActivity : AppCompatActivity() {
@@ -46,14 +46,25 @@ class NavigationDrawerActivity : AppCompatActivity() {
                         drawerShape = RoundedCornerShape(topEnd = 23.dp, bottomEnd = 23.dp),
                         drawerContent = { NavDrawer(state, coroutineScope)},
                         content = {
-                            Image(
-                                painter = painterResource(id = R.drawable.abc_ic_search_api_material),
-                                contentDescription = null,
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .fillMaxHeight(),
-                                contentScale = ContentScale.Crop
-                            )
+                           PicassoImage(data= imageData().random(),
+                               contentDescription = "image from picasso",
+                               modifier = Modifier
+                                   .fillMaxWidth()
+                                   .fillMaxHeight(),
+                               loading = {
+                                   Box(Modifier.matchParentSize()){
+                                       CircularProgressIndicator(Modifier.align(Alignment.Center))
+                                   }
+
+                               },
+                               error = {
+                                   Image(painter = painterResource(id = R.drawable.ic_baseline_error_outline_24),
+                                       contentDescription = "Error image")
+                               },
+                               fadeIn = true
+
+                           )
+
                         })
 
             }

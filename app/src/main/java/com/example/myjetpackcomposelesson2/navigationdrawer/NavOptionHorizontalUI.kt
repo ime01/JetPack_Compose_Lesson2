@@ -21,20 +21,22 @@ fun NavOptionHorizontalUI(data: NavOptionHorizontal) {
 
     Card(modifier = Modifier
         .padding(10.dp)
-        .fillMaxWidth(), shape = RoundedCornerShape(23.dp), backgroundColor = MaterialTheme.colors.secondaryVariant) {
+        .fillMaxWidth(), shape = RoundedCornerShape(23.dp)) {
 
-        Column {
+        Column() {
            Image(painter = painterResource(id = data.aImage),    contentDescription = null,
            modifier = Modifier
-               .height(100.dp)
-               .width(150.dp),
+               .padding(bottom = 10.dp)
+               .height(50.dp)
+               .width(100.dp),
            contentScale = ContentScale.Crop)
 
             Text(
                 text = data.aDes,
                 modifier = Modifier
-                    .align(Alignment.CenterHorizontally).padding(5.dp),
-                    color = Color.White,
+                    .align(Alignment.CenterHorizontally)
+                    .padding(5.dp),
+                    color = MaterialTheme.colors.secondaryVariant,
                     fontSize = 15.sp
 
             )

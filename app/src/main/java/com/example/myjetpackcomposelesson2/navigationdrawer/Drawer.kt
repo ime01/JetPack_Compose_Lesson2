@@ -40,7 +40,7 @@ fun NavDrawer(state: ScaffoldState, coroutineScope: CoroutineScope) {
 fun Header(){
     Image(painter = painterResource(id = R.drawable.letter_b), contentDescription = null,
     modifier = Modifier
-        .height(300.dp)
+        .height(200.dp)
         .padding(5.dp)
         .fillMaxWidth()
         .clip(RoundedCornerShape(23.dp)), contentScale = ContentScale.Crop)
